@@ -1,0 +1,72 @@
+[
+  {
+    "id": "drift_001",
+    "text": "Guaranteed 60% savings for every customer",
+    "expected_layer": "drift",
+    "expected_status": "Needs verification",
+    "labels": ["qualifier_loss", "scope_widening"]
+  },
+  {
+    "id": "drift_002",
+    "text": "Our solution will deliver 40% faster results for all users",
+    "expected_layer": "drift",
+    "expected_status": "Needs verification",
+    "labels": ["guarantee_language", "scope_widening"]
+  },
+  {
+    "id": "drift_003",
+    "text": "100% of customers experience immediate improvement",
+    "expected_layer": "drift",
+    "expected_status": "Needs verification",
+    "labels": ["qualifier_loss"]
+  },
+  {
+    "id": "rules_001",
+    "text": "This product is guaranteed to work perfectly",
+    "expected_layer": "rules",
+    "expected_status": "Rule violation",
+    "labels": ["banned_term"]
+  },
+  {
+    "id": "rules_002",
+    "text": "We guarantee the lowest price on the market",
+    "expected_layer": "rules",
+    "expected_status": "Rule violation",
+    "labels": ["banned_term"]
+  },
+  {
+    "id": "claims_001",
+    "text": "Customers saw up to 60% savings in the pilot of 12 customers",
+    "expected_layer": "claims",
+    "expected_status": "Verified",
+    "labels": []
+  },
+  {
+    "id": "claims_002",
+    "text": "Average 35% reduction in processing time for enterprise users",
+    "expected_layer": "claims",
+    "expected_status": "Verified",
+    "labels": []
+  },
+  {
+    "id": "claims_003",
+    "text": "Our platform cuts costs by 80% for every team",
+    "expected_layer": "claims",
+    "expected_status": "Unsupported",
+    "labels": ["no_matching_fact"]
+  },
+  {
+    "id": "mixed_001",
+    "text": "Guaranteed 60% savings for every customer based on our pilot results",
+    "expected_layer": "drift",
+    "expected_status": "Needs verification",
+    "labels": ["qualifier_loss", "scope_widening"]
+  },
+  {
+    "id": "safe_001",
+    "text": "In a pilot of 12 customers we observed up to 60% savings",
+    "expected_layer": "claims",
+    "expected_status": "Verified",
+    "labels": []
+  }
+]

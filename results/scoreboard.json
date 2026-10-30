@@ -1,0 +1,530 @@
+{
+  "total_items": 10,
+  "overall_recall": 0.9,
+  "metrics_by_layer": {
+    "rules": {
+      "precision": 0.5,
+      "recall": 1.0,
+      "support": 2,
+      "true_positives": 2
+    },
+    "claims": {
+      "precision": 0.5,
+      "recall": 1.0,
+      "support": 4,
+      "true_positives": 4
+    },
+    "drift": {
+      "precision": 0.75,
+      "recall": 0.75,
+      "support": 4,
+      "true_positives": 3
+    }
+  },
+  "results": [
+    {
+      "id": "drift_001",
+      "expected_layer": "drift",
+      "predicted_layers": [
+        "claims",
+        "drift",
+        "rules"
+      ],
+      "hit": true,
+      "findings_count": 5,
+      "findings": [
+        {
+          "layer": "rules",
+          "detection_method": "Deterministic",
+          "review_status": "Rule violation",
+          "raw_text": "guaranteed",
+          "explanation": "Absolute guarantee language is not permitted.",
+          "rule_or_fact_ref": "no_guarantee"
+        },
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "Guaranteed 60% savings",
+          "claim": {
+            "subject": "",
+            "metric": "savings",
+            "value": "60",
+            "comparator": null,
+            "population": null,
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [
+              "Guaranteed"
+            ],
+            "raw_text": "Guaranteed 60% savings",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Verified",
+          "explanation": "Matches approved fact: Up to 60% savings observed in a pilot of 12 customers",
+          "rule_or_fact_ref": "fact_001",
+          "match_score": 0.8,
+          "ledger_fact": {
+            "id": "fact_001",
+            "statement": "Up to 60% savings observed in a pilot of 12 customers",
+            "value": "60",
+            "expiry": null
+          }
+        },
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "every customer",
+          "claim": {
+            "subject": "",
+            "metric": "",
+            "value": "every",
+            "comparator": null,
+            "population": "customer",
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [],
+            "raw_text": "every customer",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Unsupported",
+          "explanation": "No approved evidence found in the Claim Ledger for this statement.",
+          "rule_or_fact_ref": null,
+          "match_score": 0.0
+        },
+        {
+          "layer": "drift",
+          "detection_method": "Deterministic",
+          "review_status": "Needs verification",
+          "raw_text": "Guaranteed",
+          "explanation": "Absolute language detected. Approved evidence usually contains qualifiers such as 'up to', 'in pilot', or 'typically'.",
+          "suggestion_hint": "Add a qualifier (e.g. 'up to', 'in our pilot') to stay faithful to the evidence.",
+          "rule_or_fact_ref": "qualifier_loss",
+          "drift_type": "qualifier_loss"
+        },
+        {
+          "layer": "drift",
+          "detection_method": "Deterministic",
+          "review_status": "Needs verification",
+          "raw_text": "for every customer",
+          "explanation": "Scope appears widened beyond the population present in the approved evidence (often a pilot or limited cohort).",
+          "suggestion_hint": "Limit the claim to the population that was actually measured.",
+          "rule_or_fact_ref": "scope_widening",
+          "drift_type": "scope_widening"
+        }
+      ]
+    },
+    {
+      "id": "drift_002",
+      "expected_layer": "drift",
+      "predicted_layers": [
+        "claims",
+        "drift"
+      ],
+      "hit": true,
+      "findings_count": 4,
+      "findings": [
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "40% faster",
+          "claim": {
+            "subject": "",
+            "metric": "faster",
+            "value": "40",
+            "comparator": null,
+            "population": null,
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [],
+            "raw_text": "40% faster",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Unsupported",
+          "explanation": "No approved evidence found in the Claim Ledger for this statement.",
+          "rule_or_fact_ref": null,
+          "match_score": 0.0
+        },
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "all users",
+          "claim": {
+            "subject": "",
+            "metric": "",
+            "value": "all",
+            "comparator": null,
+            "population": "users",
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [],
+            "raw_text": "all users",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Unsupported",
+          "explanation": "No approved evidence found in the Claim Ledger for this statement.",
+          "rule_or_fact_ref": null,
+          "match_score": 0.0
+        },
+        {
+          "layer": "drift",
+          "detection_method": "Deterministic",
+          "review_status": "Needs verification",
+          "raw_text": "for all users",
+          "explanation": "Scope appears widened beyond the population present in the approved evidence (often a pilot or limited cohort).",
+          "suggestion_hint": "Limit the claim to the population that was actually measured.",
+          "rule_or_fact_ref": "scope_widening",
+          "drift_type": "scope_widening"
+        },
+        {
+          "layer": "drift",
+          "detection_method": "Deterministic",
+          "review_status": "Needs verification",
+          "raw_text": "will deliver",
+          "explanation": "Future-guarantee wording. Prefer language that reflects observed results rather than promises.",
+          "suggestion_hint": "Replace with observed-result language (e.g. 'customers saw', 'in the pilot we measured').",
+          "rule_or_fact_ref": "guarantee_language",
+          "drift_type": "guarantee_language"
+        }
+      ]
+    },
+    {
+      "id": "drift_003",
+      "expected_layer": "drift",
+      "predicted_layers": [
+        "claims"
+      ],
+      "hit": false,
+      "findings_count": 1,
+      "findings": [
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "100% of customers",
+          "claim": {
+            "subject": "",
+            "metric": "",
+            "value": "100%",
+            "comparator": null,
+            "population": "customers",
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [],
+            "raw_text": "100% of customers",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Contradicted",
+          "explanation": "Claim value conflicts with approved fact (ledger value \u2248 60.0). Source: Up to 60% savings observed in a pilot of 12 customers",
+          "rule_or_fact_ref": "fact_001",
+          "match_score": 0.39999999999999997,
+          "ledger_fact": {
+            "id": "fact_001",
+            "statement": "Up to 60% savings observed in a pilot of 12 customers",
+            "value": "60",
+            "expiry": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "rules_001",
+      "expected_layer": "rules",
+      "predicted_layers": [
+        "drift",
+        "rules"
+      ],
+      "hit": true,
+      "findings_count": 2,
+      "findings": [
+        {
+          "layer": "rules",
+          "detection_method": "Deterministic",
+          "review_status": "Rule violation",
+          "raw_text": "guaranteed",
+          "explanation": "Absolute guarantee language is not permitted.",
+          "rule_or_fact_ref": "no_guarantee"
+        },
+        {
+          "layer": "drift",
+          "detection_method": "Deterministic",
+          "review_status": "Needs verification",
+          "raw_text": "guaranteed",
+          "explanation": "Absolute language detected. Approved evidence usually contains qualifiers such as 'up to', 'in pilot', or 'typically'.",
+          "suggestion_hint": "Add a qualifier (e.g. 'up to', 'in our pilot') to stay faithful to the evidence.",
+          "rule_or_fact_ref": "qualifier_loss",
+          "drift_type": "qualifier_loss"
+        }
+      ]
+    },
+    {
+      "id": "rules_002",
+      "expected_layer": "rules",
+      "predicted_layers": [
+        "rules"
+      ],
+      "hit": true,
+      "findings_count": 1,
+      "findings": [
+        {
+          "layer": "rules",
+          "detection_method": "Deterministic",
+          "review_status": "Rule violation",
+          "raw_text": "guarantee",
+          "explanation": "Absolute guarantee language is not permitted.",
+          "rule_or_fact_ref": "no_guarantee"
+        }
+      ]
+    },
+    {
+      "id": "claims_001",
+      "expected_layer": "claims",
+      "predicted_layers": [
+        "claims"
+      ],
+      "hit": true,
+      "findings_count": 1,
+      "findings": [
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "up to 60% savings",
+          "claim": {
+            "subject": "",
+            "metric": "savings",
+            "value": "60",
+            "comparator": null,
+            "population": null,
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [
+              "up to"
+            ],
+            "raw_text": "up to 60% savings",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Verified",
+          "explanation": "Matches approved fact: Up to 60% savings observed in a pilot of 12 customers",
+          "rule_or_fact_ref": "fact_001",
+          "match_score": 1.0,
+          "ledger_fact": {
+            "id": "fact_001",
+            "statement": "Up to 60% savings observed in a pilot of 12 customers",
+            "value": "60",
+            "expiry": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "claims_002",
+      "expected_layer": "claims",
+      "predicted_layers": [
+        "claims"
+      ],
+      "hit": true,
+      "findings_count": 1,
+      "findings": [
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "35% reduction",
+          "claim": {
+            "subject": "",
+            "metric": "reduction",
+            "value": "35",
+            "comparator": null,
+            "population": null,
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [],
+            "raw_text": "35% reduction",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Verified",
+          "explanation": "Matches approved fact: Average 35% reduction in processing time for enterprise users",
+          "rule_or_fact_ref": "fact_002",
+          "match_score": 1.0,
+          "ledger_fact": {
+            "id": "fact_002",
+            "statement": "Average 35% reduction in processing time for enterprise users",
+            "value": "35",
+            "expiry": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "claims_003",
+      "expected_layer": "claims",
+      "predicted_layers": [
+        "claims"
+      ],
+      "hit": true,
+      "findings_count": 1,
+      "findings": [
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "every team",
+          "claim": {
+            "subject": "",
+            "metric": "",
+            "value": "every",
+            "comparator": null,
+            "population": "team",
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [],
+            "raw_text": "every team",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Unsupported",
+          "explanation": "No approved evidence found in the Claim Ledger for this statement.",
+          "rule_or_fact_ref": null,
+          "match_score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "mixed_001",
+      "expected_layer": "drift",
+      "predicted_layers": [
+        "claims",
+        "drift",
+        "rules"
+      ],
+      "hit": true,
+      "findings_count": 5,
+      "findings": [
+        {
+          "layer": "rules",
+          "detection_method": "Deterministic",
+          "review_status": "Rule violation",
+          "raw_text": "guaranteed",
+          "explanation": "Absolute guarantee language is not permitted.",
+          "rule_or_fact_ref": "no_guarantee"
+        },
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "Guaranteed 60% savings",
+          "claim": {
+            "subject": "",
+            "metric": "savings",
+            "value": "60",
+            "comparator": null,
+            "population": null,
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [
+              "Guaranteed"
+            ],
+            "raw_text": "Guaranteed 60% savings",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Verified",
+          "explanation": "Matches approved fact: Up to 60% savings observed in a pilot of 12 customers",
+          "rule_or_fact_ref": "fact_001",
+          "match_score": 0.8,
+          "ledger_fact": {
+            "id": "fact_001",
+            "statement": "Up to 60% savings observed in a pilot of 12 customers",
+            "value": "60",
+            "expiry": null
+          }
+        },
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "every customer",
+          "claim": {
+            "subject": "",
+            "metric": "",
+            "value": "every",
+            "comparator": null,
+            "population": "customer",
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [],
+            "raw_text": "every customer",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Unsupported",
+          "explanation": "No approved evidence found in the Claim Ledger for this statement.",
+          "rule_or_fact_ref": null,
+          "match_score": 0.0
+        },
+        {
+          "layer": "drift",
+          "detection_method": "Deterministic",
+          "review_status": "Needs verification",
+          "raw_text": "Guaranteed",
+          "explanation": "Absolute language detected. Approved evidence usually contains qualifiers such as 'up to', 'in pilot', or 'typically'.",
+          "suggestion_hint": "Add a qualifier (e.g. 'up to', 'in our pilot') to stay faithful to the evidence.",
+          "rule_or_fact_ref": "qualifier_loss",
+          "drift_type": "qualifier_loss"
+        },
+        {
+          "layer": "drift",
+          "detection_method": "Deterministic",
+          "review_status": "Needs verification",
+          "raw_text": "for every customer",
+          "explanation": "Scope appears widened beyond the population present in the approved evidence (often a pilot or limited cohort).",
+          "suggestion_hint": "Limit the claim to the population that was actually measured.",
+          "rule_or_fact_ref": "scope_widening",
+          "drift_type": "scope_widening"
+        }
+      ]
+    },
+    {
+      "id": "safe_001",
+      "expected_layer": "claims",
+      "predicted_layers": [
+        "claims"
+      ],
+      "hit": true,
+      "findings_count": 1,
+      "findings": [
+        {
+          "layer": "claims",
+          "detection_method": "Deterministic",
+          "raw_text": "up to 60% savings",
+          "claim": {
+            "subject": "",
+            "metric": "savings",
+            "value": "60",
+            "comparator": null,
+            "population": null,
+            "conditions": null,
+            "timeframe": null,
+            "qualifiers": [
+              "up to"
+            ],
+            "raw_text": "up to 60% savings",
+            "extraction_path": "regex"
+          },
+          "extraction_path": "regex",
+          "review_status": "Verified",
+          "explanation": "Matches approved fact: Up to 60% savings observed in a pilot of 12 customers",
+          "rule_or_fact_ref": "fact_001",
+          "match_score": 1.0,
+          "ledger_fact": {
+            "id": "fact_001",
+            "statement": "Up to 60% savings observed in a pilot of 12 customers",
+            "value": "60",
+            "expiry": null
+          }
+        }
+      ]
+    }
+  ]
+}
